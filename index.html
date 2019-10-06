@@ -12,19 +12,25 @@
 
 <body>
     <div class="container main">
-        <div class="row">
-            <h1>GIF-er</h1>
-        
+        <div class="row">  
+            <div class="col-12">
+                <h1>GIF-er</h1>
+            </div>
+            
+            <div class="col-8">
             <!-- Buttons will be inserted here  -->
-            <div id="btnsHere"></div>
-        
-            <form id="gifForm">
-            <label for="gifInput">Add a GIF category!</label>
-            <input type="text" id="gifInput"><br>
-        
-            <!-- Adds new topic -->
-            <input id="addGif" type="submit" value="Add a GIF category!" class="btn btn-secondary">
-            </form>
+                <div id="btnsHere"></div>
+            </div>
+
+            <div class="col-4">
+                <form class="jumbotron">
+                    <div class="form-group">
+                        <label for="gifInput">Add a GIF category!</label>
+                        <input type="text" id="gifInput" class="form-control" aria-describedby="inputGIF" placeholder="Nuggets">
+                    </div>
+                    <input id="addGif" type="submit" value="Add a GIF category!" class="btn btn-secondary">
+                </form>
+            </div>
         </div>
     </div>
 
