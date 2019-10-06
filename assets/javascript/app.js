@@ -14,7 +14,7 @@ var gifr = {
     offset:0,
 
     //Array of topics that gets updated
-    topics:["cheese","dogs","blue","halloween","t-rex"],
+    topics:["cheese","dogs","cats","halloween","t-rex","mexico", "javascript","paper", "existance", "millenials", "dobbie"],
 
     //Generates button for every topic in array
     genBtns:function(){
@@ -47,13 +47,15 @@ var gifr = {
         for(let gif of gifs.data){
             console.log(gif);
             $("#gifsHere").append(`
-            <div class="card bg-light mb-3 border-info">
-                <img src="${this.giphySRC1}${gif.id}/giphy_s.gif" id=${gif.id} class="card-img-top" alt="gif" data-still="true">
-                <div class="card-body">
-                    <h5 class="card-title text-info">${gif.title}</h5>
-                    <p class="card-text"><b>Rating:</b> ${gif.rating}</p>
-                    <p class="card-text"><b>Uploded:</b> ${gif.import_datetime}</p>
-                    <p class="card-text"><b>By:</b> `+(gif.username===""?"Anonymus":`<a href="${gif.user.profile_url}" target="_blank"><img src="${gif.user.avatar_url}" class="profilePic"/>${gif.user.display_name}</a>`)+`</p> 
+            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+                <div class="card bg-light border-info">
+                    <img src="${this.giphySRC1}${gif.id}/giphy_s.gif" id=${gif.id} class="card-img-top" alt="gif" data-still="true">
+                    <div class="card-body">
+                        <h5 class="card-title text-info">${gif.title}</h5>
+                        <p class="card-text"><b>Rating:</b> ${gif.rating}</p>
+                        <p class="card-text"><b>Uploded:</b> ${gif.import_datetime}</p>
+                        <p class="card-text"><b>By:</b> `+(gif.username===""?"Anonymus":`<a href="${gif.user.profile_url}" target="_blank"><img src="${gif.user.avatar_url}" class="profilePic"/>${gif.user.display_name}</a>`)+`</p> 
+                    </div>
                 </div>
             </div>`);
         }
