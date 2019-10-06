@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=.9, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>GIF-er</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/0e1aa99fa5.js" crossorigin="anonymous"></script>
@@ -11,32 +11,38 @@
 </head>
 
 <body>
-    <div class="container main">
+    <div class="main container-fluid">
         <div class="row">  
-            <div class="col-12">
-                <h1>GIF-er</h1>
-            </div>
-            
             <div class="col-8">
-            <!-- Buttons will be inserted here  -->
-                <div id="btnsHere"></div>
+                <div class="row">
+                    <div class="col-12">
+                        <h1>GIF-er</h1>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Buttons will be inserted here  -->
+                        <div id="btnsHere"></div>
+                    </div>
+                </div>
             </div>
 
             <div class="col-4">
                 <form class="jumbotron">
                     <div class="form-group">
-                        <label for="gifInput">Add a GIF category!</label>
+                        <label for="gifInput">Add new topic</label>
                         <input type="text" id="gifInput" class="form-control" aria-describedby="inputGIF" placeholder="Nuggets">
                     </div>
-                    <input id="addGif" type="submit" value="Add a GIF category!" class="btn btn-secondary">
+                    <input id="addGif" type="submit" value="Add" class="btn btn-secondary">
                 </form>
             </div>
         </div>
-    </div>
 
-    <!-- All gifs will be inserted inside this -->
-    <div id="gifsHere" class="row">
-    </div>    
+        <!-- All gifs will be inserted inside this -->
+        <div id="gifsHere" class="row">
+        </div>
+    </div>
     
     <!-- Javascript links -->
     <div>
