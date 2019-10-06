@@ -5,3 +5,12 @@
 .btn{
     margin:5px;
 }
+
+.img-fluid{
+    border-radius: 3px;
+}
+
+.profilePic{
+    height:30px;
+    width:30px;
+}

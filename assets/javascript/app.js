@@ -46,10 +46,15 @@ var gifr = {
         $("#gifsHere").empty();
         for(let gif of gifs.data){
             console.log(gif);
-            //<iframe src=${gif.embed_url} width="480" height="480" frameBorder="0"></iframe>
             $("#gifsHere").append(`
             <div class="col-4">
-                <img src=${this.giphySRC1}${gif.id}/giphy_s.gif id=${gif.id} class="img-fluid" data-still="true">
+                <div class="jumbotron">
+                    <img src="${this.giphySRC1}${gif.id}/giphy_s.gif" id=${gif.id} class="img-fluid" data-still="true">
+                    <h5>${gif.title}</h5>
+                    <p class="text">Uploded: ${gif.import_datetime}</p>
+                    <p class="text">Rating: ${gif.rating}</p>
+                    <p class="text">By: `+(gif.username===""?"Anonymus":`<a href="${gif.user.profile_url}" target="_blank"><img src="${gif.user.avatar_url}" class="profilePic"/>${gif.user.display_name}</a>`)+`</p> 
+                </div>
             </div>`);
         }
     },
