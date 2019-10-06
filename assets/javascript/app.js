@@ -36,6 +36,7 @@ var gifr = {
             url: `${this.queryURL}${y+x+this.z}&q=${topic}&limit=${this.limit}&offset=${this.offset}`,
             method: "GET"
         }).then(function(response) {
+            $("#gifsHere").empty();
             gifr.addGifs(response);
             console.log(response);
         });
@@ -43,17 +44,16 @@ var gifr = {
 
     //Displays requested GIFs
     addGifs:function(gifs){
-        $("#gifsHere").empty();
         for(let gif of gifs.data){
             console.log(gif);
             $("#gifsHere").append(`
-            <div class="col-4">
-                <div class="jumbotron">
-                    <img src="${this.giphySRC1}${gif.id}/giphy_s.gif" id=${gif.id} class="img-fluid" data-still="true">
-                    <h5>${gif.title}</h5>
-                    <p class="text">Uploded: ${gif.import_datetime}</p>
-                    <p class="text">Rating: ${gif.rating}</p>
-                    <p class="text">By: `+(gif.username===""?"Anonymus":`<a href="${gif.user.profile_url}" target="_blank"><img src="${gif.user.avatar_url}" class="profilePic"/>${gif.user.display_name}</a>`)+`</p> 
+            <div class="card bg-light mb-3 border-info">
+                <img src="${this.giphySRC1}${gif.id}/giphy_s.gif" id=${gif.id} class="card-img-top" alt="gif" data-still="true">
+                <div class="card-body">
+                    <h5 class="card-title text-info">${gif.title}</h5>
+                    <p class="card-text"><b>Rating:</b> ${gif.rating}</p>
+                    <p class="card-text"><b>Uploded:</b> ${gif.import_datetime}</p>
+                    <p class="card-text"><b>By:</b> `+(gif.username===""?"Anonymus":`<a href="${gif.user.profile_url}" target="_blank"><img src="${gif.user.avatar_url}" class="profilePic"/>${gif.user.display_name}</a>`)+`</p> 
                 </div>
             </div>`);
         }
@@ -87,7 +87,7 @@ $(document).ready(function() {
     });
 
     //Changes still gif to animates and vice-versa
-    $(document).on("click",".img-fluid",function(){
+    $(document).on("click",".card-img-top",function(){
         gifr.gifState($(this).attr("id").toString());
     });
 });
