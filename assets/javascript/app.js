@@ -10,7 +10,7 @@ var gifr = {
 
     z:"dSnmwGm9c",
     
-    limit:3,
+    limit:10,
     offset:0,
 
     //Array of topics that gets updated
@@ -20,14 +20,29 @@ var gifr = {
     genBtns:function(){
         $("#btnsHere").empty();
         for(let topic of this.topics){
-          $("#btnsHere").append(`<button class="btn btn-secondary topicBtn" id=${topic.split(" ").join("+")}>${topic}</button>`);
+          $("#btnsHere").append(`<button class="btn btn-info" id=${topic.split(" ").join("+")}>${topic}</button>`);
         }
     },
 
     //Adds an element to the topics array, and then re-generates the buttons by calling the method
     addTopic:function(topic){
-        this.topics.push(topic);
-        this.genBtns();
+        if(this.checkTopic(topic)){
+            this.topics.push(topic);
+            this.genBtns();
+        } else{
+            $('#errorTopic').modal('show');
+        }
+    },
+
+    //Checks if the topic addes is not empty or already in the array
+    checkTopic(newTopic){
+        if(newTopic==="") return false;
+        
+        for(let topic of this.topics){
+            if(topic.toLowerCase()===newTopic.toLowerCase())return false;
+        }
+
+        return true;
     },
 
     //Requests GIFs from GIPHY API
@@ -59,6 +74,7 @@ var gifr = {
                 </div>
             </div>`);
         }
+        $("#gifsHere").append(`<button type="button" class="btn btn-success">Load more GIFs!</button>`);
     },
 
     //Changes animated gif to still and vice-versa
@@ -78,7 +94,7 @@ $(document).ready(function() {
     gifr.genBtns();
 
     //Receives topic clicked and generates GIFs based on the id of the button
-    $(document).on("click", ".topicBtn", function() {
+    $(document).on("click", ".btn-info", function() {
         gifr.queryTopic($(this).attr("id").toString());
     });
 

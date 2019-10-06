@@ -11,12 +11,15 @@
 </head>
 
 <body>
+    
     <div class="main container-fluid">
+
         <div class="row">  
+
             <div class="col-xl-8 col-lg-8 col-md-6 col-sm-6 col-12">
                 <div class="row">
                     <div class="col-12">
-                        <h1>GIF-er</h1>
+                        <h1 class="text-center">GIF-er</h1>
                     </div>
                 </div>
                 
@@ -37,13 +40,33 @@
                     <input id="addGif" type="submit" value="Add" class="btn btn-secondary">
                 </form>
             </div>
+
         </div>
 
         <!-- All gifs will be inserted inside this -->
-        <div id="gifsHere" class="row">
-        </div>
+        <div id="gifsHere" class="row"></div>
     </div>
     
+    <!-- Error adding topic modal -->
+    <div class="modal fade" id="errorTopic" tabindex="-1" role="dialog" aria-labelledby="errorTopic" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Error adding topic</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    New topic can't be empty or one already added...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Javascript links -->
     <div>
         <!-- Optional JavaScript -->
@@ -54,5 +77,6 @@
         <script src="assets/javascript/navbar.js"></script>
         <script src="assets/javascript/app.js"></script>
     </div>
+
 </body>
 </html>
