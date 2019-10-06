@@ -4,6 +4,10 @@ var y="nmaNC0RUMO1ZHL";
 var gifr = {
     //Basic url, which is then built upon
     queryURL:"https://api.giphy.com/v1/gifs/search?api_key=",
+
+    //GIPHY url
+    giphySRC1:"https://i.giphy.com/media/",
+
     z:"dSnmwGm9c",
     
     limit:3,
@@ -45,40 +49,20 @@ var gifr = {
             //<iframe src=${gif.embed_url} width="480" height="480" frameBorder="0"></iframe>
             $("#gifsHere").append(`
             <div class="col-4">
-                <img src=https://i.giphy.com/media/${gif.id}/giphy.webp data="still">
-            </div>
-            `);
-        }
-        /*
-        if(response.Response==="True"){
-            $("#movies-view").prepend(`
-            <div class="row">
-                <div class="jumbotron col">
-                <div class="row">
-                    <div class="col-12">
-                    <h1 class="text-center">${response.Title}</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                    <img src=${response.Poster} class="img-fluid">
-                    </div>
-                    <div class="col-7">
-                    <p class="text"><b>Rating:</b> ${response.Rated}</p>
-                    <p class="text"><b>Release Date:</b> ${response.Released}</p>
-                    <p class="text"><b>Plot:</b> ${response.Plot}</p>
-                    </div>
-                </div>
-                </div>
+                <img src=${this.giphySRC1}${gif.id}/giphy_s.gif id=${gif.id} class="img-fluid" data-still="true">
             </div>`);
-        }else{
-            console.log("Movie not found, removing button");
-            movies = movies.filter(function(value, index, arr){
-            return value !== movie;
-            });
-            renderButtons();
         }
-        */
+    },
+
+    //Changes animated gif to still and vice-versa
+    gifState:function(id){
+        if($(`#${id}`).attr("data-still")==="true"){
+            $(`#${id}`).attr("src",`${this.giphySRC1}${id}/giphy.gif`)
+            $(`#${id}`).attr("data-still","false")
+        }else{
+            $(`#${id}`).attr("src",`${this.giphySRC1}${id}/giphy_s.gif`)
+            $(`#${id}`).attr("data-still","true")
+        }
     },
 }
 
@@ -95,5 +79,10 @@ $(document).ready(function() {
     $("#addGif").on("click", function(event) {
         event.preventDefault();
         gifr.addTopic($("#gifInput").val().trim());
-      });
+    });
+
+    //Changes still gif to animates and vice-versa
+    $(document).on("click",".img-fluid",function(){
+        gifr.gifState($(this).attr("id").toString());
+    });
 });
