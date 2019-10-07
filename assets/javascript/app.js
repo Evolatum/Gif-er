@@ -11,10 +11,15 @@ var gifr = {
     z:"dSnmwGm9c",
     
     limit:10,
-    offset:0,
 
     //Array of topics that gets updated
     topics:["cheese","dogs","cats","halloween","t-rex","mexico", "javascript","paper", "existance", "millenials", "dobbie"],
+
+    //Holds current topic for when querying more of same topic
+    currentTopic:"",
+    
+    //Holds current offset for when quering more of same topic
+    offset:0,
 
     //Generates button for every topic in array
     genBtns:function(){
@@ -51,16 +56,14 @@ var gifr = {
             url: `${this.queryURL}${y+x+this.z}&q=${topic}&limit=${this.limit}&offset=${this.offset}`,
             method: "GET"
         }).then(function(response) {
-            $("#gifsHere").empty();
             gifr.addGifs(response);
-            console.log(response);
         });
+        this.offset+=this.limit;
     },
 
     //Displays requested GIFs
     addGifs:function(gifs){
         for(let gif of gifs.data){
-            console.log(gif);
             $("#gifsHere").append(`
             <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
                 <div class="card bg-light border-info">
@@ -95,7 +98,9 @@ $(document).ready(function() {
 
     //Receives topic clicked and generates GIFs based on the id of the button
     $(document).on("click", ".btn-info", function() {
-        gifr.queryTopic($(this).attr("id").toString());
+        $("#gifsHere").empty();
+        gifr.currentTopic = $(this).attr("id").toString();
+        gifr.queryTopic(gifr.currentTopic);
     });
 
     //Adds a new topic to array
@@ -108,4 +113,11 @@ $(document).ready(function() {
     $(document).on("click",".card-img-top",function(){
         gifr.gifState($(this).attr("id").toString());
     });
+
+    //Adds more gifs of same topic
+    $(document).on("click",".btn-success",function(){
+        $(".btn-success").remove();
+        gifr.queryTopic(gifr.currentTopic);
+    });
+    
 });
