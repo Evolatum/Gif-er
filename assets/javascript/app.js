@@ -99,6 +99,7 @@ $(document).ready(function() {
     //Receives topic clicked and generates GIFs based on the id of the button
     $(document).on("click", ".btn-info", function() {
         $("#gifsHere").empty();
+        gifr.offset = 0;
         gifr.currentTopic = $(this).attr("id").toString();
         gifr.queryTopic(gifr.currentTopic);
     });
