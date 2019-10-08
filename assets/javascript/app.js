@@ -30,7 +30,7 @@ var gifr = {
     //Generates button for every topic in array
     genBtns:function(){
         $("#btnsHere").empty();
-        $("#btnsHere").append(`<button class="btn btn-primary" id="favoritesBtn">Favories</button>`);
+        $("#btnsHere").append(`<button class="btn btn-primary" id="favoritesBtn">Favorites</button>`);
         for(let topic of this.topics){
           $("#btnsHere").append(`<button class="btn btn-info" id=${topic.split(" ").join("+")}>${topic}</button>`);
         }
@@ -160,7 +160,7 @@ var gifr = {
 
     },
 
-    //Removes a GIF from favories
+    //Removes a GIF from favorites
     delFav:function(oldFav){
         for(let fav of this.favorites){
             if(fav===oldFav.substring(6)){
@@ -221,7 +221,7 @@ $(document).ready(function() {
         gifr.displayFavs();
     });
 
-    //Removes a GIF from favories
+    //Removes a GIF from favorites
     $(document).on("click", ".btn-danger", function() {
         gifr.delFav($(this).attr("id").toString());
     });
