@@ -46,9 +46,12 @@ var gifr = {
         }
     },
 
-    //Checks if the topic addes is not empty or already in the array
+    //Checks if the topic addes is not empty, contains a special character, or is already in the array
     checkTopic(newTopic){
         if(newTopic==="") return false;
+
+        var regex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+        if(regex.test(newTopic))return false;
         
         for(let topic of this.topics){
             if(topic.toLowerCase()===newTopic.toLowerCase())return false;
