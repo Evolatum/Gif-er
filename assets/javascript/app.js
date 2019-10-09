@@ -31,6 +31,7 @@ var gifr = {
     genBtns:function(){
         $("#btnsHere").empty();
         $("#btnsHere").append(`<button class="btn btn-primary" id="favoritesBtn">Favorites</button>`);
+        $("#btnsHere").append(`<button class="btn btn-warning" id="randomBtn">Random</button>`);
         for(let topic of this.topics){
           $("#btnsHere").append(`<button class="btn btn-info" id=${topic.split(" ").join("+")}>${topic}</button>`);
         }
@@ -177,6 +178,28 @@ var gifr = {
             window.localStorage.setItem('favs',this.favorites.join(","));
         }
     },
+
+    displayRandom:function(){
+        $.ajax({
+            url: `https://api.giphy.com/v1/gifs/random?api_key=${y+x+this.z}`,
+            method: "GET"
+        }).then(function(response) {
+            $("#gifsHere").empty();
+            var gif = response.data;
+            $("#gifsHere").append(`
+            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12">
+                <div class="card bg-light border-info">
+                    <img src="${gifr.giphySRC1}${gif.id}/giphy_s.gif" id=${gif.id} class="card-img-top" alt="gif" data-still="true">
+                    <div class="card-body">
+                        <h5 class="card-title text-info">${gif.title===""||gif.title===" "?gif.slug.split("-").join(" "):gif.title}</h5>
+                        <p class="card-text"><b>Uploded:</b> ${gif.import_datetime}</p>
+                        <p class="card-text"><b>By:</b> `+(gif.username===""?"Anonymus":`<a href="${gif.user.profile_url}" target="_blank"><img src="${gif.user.avatar_url}" class="profilePic"/>${gif.user.display_name}</a>`)+`</p> 
+                        <button class="btn btn-primary favGif" id="fav${gif.id}">Add to Favorites</button>
+                    </div>
+                </div>
+            </div>`);
+        });
+    },
 }
 
 $(document).ready(function() {
@@ -227,5 +250,11 @@ $(document).ready(function() {
     //Removes a GIF from favorites
     $(document).on("click", ".btn-danger", function() {
         gifr.delFav($(this).attr("id").toString());
+    });
+
+    //Display random GIFs
+    $(document).on("click", "#randomBtn", function() {
+        gifr.currentTopic="";
+        gifr.displayRandom();
     });
 });
