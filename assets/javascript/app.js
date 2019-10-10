@@ -45,6 +45,7 @@ var gifr = {
         } else{
             $('#errorTopic').modal('show');
         }
+        $("#gifInput").val("");
     },
 
     //Checks if the topic addes is not empty, contains a special character, or is already in the array
